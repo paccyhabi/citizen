@@ -57,7 +57,7 @@ $now = date('Y-m-d H:i:s');
                         <div class="inner">
                             <?php 
                             // Count options
-                            $sqlUsers = "SELECT COUNT(*) AS usersCount FROM users where role ='umuturage'";
+                            $sqlUsers = "SELECT COUNT(*) AS usersCount FROM users where role ='umuturage' and isActive = 1";
                             $stmtUsers = $pdo->query($sqlUsers);
                             $usersCount = $stmtUsers->fetch(PDO::FETCH_ASSOC)['usersCount'];  
                             ?>

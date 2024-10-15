@@ -7,6 +7,7 @@ if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $password = sha1($_POST['password1']);
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
 
     // Check if the username already exists
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
@@ -15,10 +16,11 @@ if (isset($_POST['register'])) {
         $message = 'Username already exists!';
     } else {
         // Insert new user into the database
-        $stmt = $pdo->prepare("INSERT INTO users (username,email,password) VALUES (?, ?, ?)");
-        if ($stmt->execute([$username,$email,$password])) {
+        $stmt = $pdo->prepare("INSERT INTO users (username,email,phoneNumber,password) VALUES (?, ?, ?, ?)");
+        if ($stmt->execute([$username,$email,$phone,$password])) {
             $_SESSION["username"] = $username;
-            header("Location: ./home");
+            $_SESSION["role"] = "umuturage";
+            header("Location: ./includes/files.php");
             exit;
         } else {
             $message = 'Error creating account. Please try again.';
@@ -92,6 +94,14 @@ if (isset($_POST['register'])) {
                                             <input type="email" id="form3Example3c" class="form-control" placeholder="Your Email" required name = "email" />
                                         </div>
                                     </div>
+                                    <div class="form-group mb-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" id="form3Example1c" class="form-control" placeholder="Your phone number" required name = "phone" />
+                                        </div>
+                                    </div>                                    
 
                                     <div class="form-group mb-4">
                                         <div class="input-group">
