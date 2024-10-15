@@ -207,7 +207,7 @@ if(!isset($_SESSION['username'])){
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="fa-solid fa-list-check mr-1"></i>
+              <i class="fa-solid fa-book mr-1"></i>
               <p>
                 Report
                 <i class="right fas fa-angle-left"></i>
