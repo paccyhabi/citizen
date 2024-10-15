@@ -2,7 +2,7 @@
 // index.php
 
 // Get the page parameter from the URL
-$page = $_GET['page'] ?? 'home'; // Default to 'home' if no page is specified
+$page = $_GET['page'] ?? 'index2';
 
 // Sanitize the page parameter to prevent directory traversal attacks
 $page = preg_replace('/[^a-zA-Z0-9_-]/', '', $page); // Allow only alphanumeric, underscores, and hyphens

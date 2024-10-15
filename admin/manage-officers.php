@@ -3,7 +3,7 @@ include "../includes/header.php";
 
 // Fetch users from the database
 $sql = "SELECT users.userId, users.username, users.email, users.createdAt 
-        FROM users where role ='officer'";
+        FROM users where role ='officer' and isActive = 1";
 $stmt = $pdo->query($sql);
 $users = $stmt->fetchAll();
 ?>
@@ -38,7 +38,7 @@ $users = $stmt->fetchAll();
                 <thead>
                   <tr>
                     <th>N<sup><u>o</u></sup></th>
-                    <th>Username</th>
+                    <th>Officer</th>
                     <th>Email</th>
                     <th>Created At</th>
                     <th>Actions</th>
@@ -52,7 +52,14 @@ $users = $stmt->fetchAll();
                       <td><?php echo htmlspecialchars($user['email']); ?></td>
                       <td><?php echo htmlspecialchars($user['createdAt']); ?></td>
                       <td>
-                        <b><a href="#">...</a></b>
+                        <div class="dropdown">
+                            <a href="#" class="" data-toggle="dropdown">...</a>
+                            <div class="dropdown-menu">
+                            <a class="dropdown-item text-primary" href="./officer-appointments.php?userId=<?php echo $user['userId']; ?>">Appointments</a>                             
+                            <a class="dropdown-item text-primary" href="./officer-slots.php?userId=<?php echo $user['userId']; ?>">Slots</a>                             
+                            <a class="dropdown-item text-primary" href="./officer-status.php?userId=<?php echo $user['userId']; ?>">Status</a>                             
+                            <a class="dropdown-item text-primary" href="./delete/delete-user.php?userId=<?php echo $user['userId']; ?>">Delete</a>                                                        
+                        </div>
                       </td>
                     </tr>
                   <?php endforeach; ?>

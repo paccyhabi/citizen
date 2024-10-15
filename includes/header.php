@@ -44,7 +44,10 @@ if(!isset($_SESSION['username'])){
   <link rel="stylesheet" href="../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -57,7 +60,7 @@ if(!isset($_SESSION['username'])){
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/mkul/admin" class="nav-link">Home</a>
+        <a href="/citizen/admin" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -130,11 +133,28 @@ if(!isset($_SESSION['username'])){
               <li class="nav-item">
                 <a href="my-slots.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Slots</p>
+                  <p>My Slots</p>
                 </a>
               </li>
             </ul>
-          </li>  
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-list-check mr-1"></i>
+              <p>
+                Appointments
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="my-appointment.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>My appointments</p>
+                </a>
+              </li>
+            </ul>
+          </li>            
           <?php 
           }
           if($role == "admin"){
@@ -167,7 +187,41 @@ if(!isset($_SESSION['username'])){
                 </a>
               </li>                           
             </ul>
-          </li>  
+          </li> 
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-list-check mr-1"></i>
+              <p>
+                Appointments
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="manage-appointments.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Appointments</p>
+                </a>
+              </li>                          
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-list-check mr-1"></i>
+              <p>
+                Report
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="overlall.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Overall Report</p>
+                </a>
+              </li>                          
+            </ul>
+          </li>                      
       <?php
           }
           ?>     

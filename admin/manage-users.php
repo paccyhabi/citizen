@@ -2,8 +2,8 @@
 include "../includes/header.php";
 
 // Fetch users from the database
-$sql = "SELECT users.userId, users.username, users.email,users.createdAt 
-        FROM users where role ='umuturage'";
+$sql = "SELECT users.userId, users.username, users.email, users.createdAt 
+        FROM users where role ='umuturage' and isActive = 1";
 $stmt = $pdo->query($sql);
 $users = $stmt->fetchAll();
 ?>
@@ -15,12 +15,12 @@ $users = $stmt->fetchAll();
     <div class="container-fluuserId">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Citizens</h1>
+          <h1>Users</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active">Manage Citizens</li>
+            <li class="breadcrumb-item active">Manage Officers</li>
           </ol>
         </div>
       </div>
@@ -38,7 +38,7 @@ $users = $stmt->fetchAll();
                 <thead>
                   <tr>
                     <th>N<sup><u>o</u></sup></th>
-                    <th>Username</th>
+                    <th>Citizen</th>
                     <th>Email</th>
                     <th>Created At</th>
                     <th>Actions</th>
@@ -52,7 +52,12 @@ $users = $stmt->fetchAll();
                       <td><?php echo htmlspecialchars($user['email']); ?></td>
                       <td><?php echo htmlspecialchars($user['createdAt']); ?></td>
                       <td>
-                        <b><a href="#">...</a></b>
+                        <div class="dropdown">
+                            <a href="#" class="" data-toggle="dropdown">...</a>
+                            <div class="dropdown-menu">
+                            <a class="dropdown-item text-primary" href="./my-appointments.php?userId=<?php echo $user['userId']; ?>">Appointments</a>                                                        
+                            <a class="dropdown-item text-primary" href="./delete/delete-user.php?userId=<?php echo $user['userId']; ?>">Delete</a>                                                        
+                        </div>
                       </td>
                     </tr>
                   <?php endforeach; ?>
@@ -72,6 +77,6 @@ $users = $stmt->fetchAll();
 </div>
 <!-- /.content-wrapper -->
 
-<?php 
-  include "../includes/datatableFooter.php";
-  ?>
+<?php  
+include "../includes/datatableFooter.php";
+?>

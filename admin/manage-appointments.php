@@ -1,6 +1,17 @@
 <?php 
 include "../includes/header.php";
-$sql = "SELECT appointments.reason, slots.startTime, slots.endTime, appointments.status,users.username FROM appointments INNER JOIN users ON appointments.createdBy = users.id INNER JOIN slots ON appointments.slot_id = slots.id ORDER BY appointments.id DESC";
+$sql = "SELECT appointments.reason, 
+               slots.startTime, 
+               slots.endTime, 
+               appointments.status, 
+               citizen.username AS citizen_name, 
+               officer.username AS officer_name
+        FROM appointments 
+        INNER JOIN users AS citizen ON appointments.citizenId = citizen.userId 
+        INNER JOIN slots ON appointments.slotId = slots.id 
+        INNER JOIN users AS officer ON slots.officerId = officer.userId 
+        ORDER BY appointments.appId DESC";
+
 $stmt = $pdo->query($sql);
 $Appointments = $stmt->fetchAll();
 ?>
@@ -50,12 +61,34 @@ $Appointments = $stmt->fetchAll();
                         <td><?php echo htmlspecialchars($appointment['reason']); ?></td>
                         <td><?php echo htmlspecialchars($appointment['startTime']); ?></td>
                         <td><?php echo htmlspecialchars($appointment['endTime']); ?></td>
-                        <td><?php echo htmlspecialchars($appointment['citizenName']); ?></td>
-                        <td><?php echo htmlspecialchars($appointment['officerName']); ?></td>
-                        <td><?php echo htmlspecialchars($appointment['status']); ?></td>
+                        <td><?php echo htmlspecialchars($appointment['citizen_name']); ?></td> <!-- Made by -->
+                        <td><?php echo htmlspecialchars($appointment['officer_name']); ?></td> <!-- Assigned to -->
+                        <td class="<?php 
+                                            // Determine the class based on the appointment status
+                                            switch (htmlspecialchars($appointment['status'])) {
+                                                case 'cancelled':
+                                                    echo 'text-danger'; // Red color for cancelled
+                                                    break;
+                                                case 'pending':
+                                                    echo 'text-warning'; // Yellow color for pending
+                                                    break;
+                                                case 'approved':
+                                                    echo 'text-success'; // Green color for approved
+                                                    break;
+                                                case 'completed':
+                                                    echo 'text-info'; // Blue color for completed
+                                                    break;
+                                                default:
+                                                    echo 'text-secondary'; // Default color
+                                                    break;
+                                            }
+                                        ?>">
+                                            <?php echo htmlspecialchars($appointment['status']); ?>
+                                        </td>
                     </tr>
                 <?php endforeach; ?>           
               </tbody>
+
             </table>
           </div>
           <!-- /.card-body -->

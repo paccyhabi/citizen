@@ -8,10 +8,9 @@ if (isset($_POST['login'])) {
     $username = $_POST["username"];
     $password = sha1($_POST["password"]);
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ? AND isActive = 1");
     $stmt->execute([$username, $password]);
     $user = $stmt->fetch();
-
     if ($user) {
         $_SESSION["username"] = $user["username"];
         $_SESSION["role"] = $user["role"];
@@ -194,7 +193,7 @@ if (isset($_POST['login'])) {
     <header>
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-            <a class="navbar-brand" href="#"><img src="./dist/img/Capture.png" alt="pvms Logo"></a>
+            <a class="navbar-brand" href="#"><img src="" alt="citizen appointment system Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -254,7 +253,7 @@ if (isset($_POST['btnSubmit'])) {
     $mail->Host = "smtp.gmail.com";
     $mail->Port = 465;
     $mail->From = "paccyhabi@gmail.com"; 
-    $mail->FromName = 'pvms || Contact Form';
+    $mail->FromName = 'Citizen appointment System || Contact Form';
     $mail->addAddress("paccyhabi@gmail.com"); 
     $mail->Subject = 'New Contact Message from ' . $name;
     $mail->isHTML(true);

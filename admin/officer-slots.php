@@ -1,9 +1,9 @@
 <?php 
 include "../includes/header.php";
-
+$userId = isset($_GET['userId']) ? $_GET['userId'] : '';
 // Fetch Slots and their corresponding department names from the database
 $now = date('Y-m-d H:i:s'); // Ensure the time format is correct
-$sql = "SELECT * from slots where availability='1' and startTime>='$now' and officerId = '$id'";
+$sql = "SELECT * from slots where availability='1' and startTime>='$now' and officerId = '$userId'";
 $stmt = $pdo->query($sql);
 $Slots = $stmt->fetchAll();
 
