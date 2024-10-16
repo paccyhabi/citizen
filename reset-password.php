@@ -171,8 +171,8 @@ button[disabled] {
   
       $hashedpassword = sha1($password);
   
-      $loginpage = 'https://citizen-apptment.cleverapps.io/index2.php';
-      $reset = 'https://citizen-apptment.cleverapps.io/reset-password.php';
+      $loginpage = 'http://localhost/citizen/index2.php';
+      $reset = 'http://localhost/citizen/reset-password.php';
   
       // Prepare the statement to check if the token and email match
       $stmt = $pdo->prepare("SELECT * FROM `users` WHERE `reset_link_token` = :token AND `email` = :email");
